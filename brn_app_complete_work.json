@@ -19,7 +19,7 @@
   },
   "current_state": {
     "status": "Running successfully",
-    "build_status": "Clean build completed",
+    "build_status": "BRN build completed",
     "animation_issues": "Resolved - removed all animations to eliminate JS driven animation errors",
     "navigation": "Fixed - single bottom navigation overlay, contextual right-side menu",
     "floating_menus": "Removed duplicate middle navigation menu"
@@ -228,7 +228,7 @@
   "build_commands": {
     "start_metro": "npx react-native start --reset-cache",
     "run_android": "npx react-native run-android",
-    "clean_android": "cd android && .\\gradlew clean",
+    "clean_android": "cd android && .\\gradlew BRN",
     "install_deps": "npm install",
     "environment_setup": {
       "JAVA_HOME": "$(Resolve-Path ./jdk-17.0.2)",
