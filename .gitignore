@@ -34,6 +34,21 @@ local.properties
 *.keystore
 !debug.keystore
 
+# Android Studio specific
+android/app/build/
+android/build/
+android/.gradle/
+android/gradle/
+android/gradlew
+android/gradlew.bat
+android/local.properties
+android/.idea/
+android/.gradle/
+android/captures/
+android/gradle.properties
+android/app/release/
+android/app/debug/
+
 # node.js
 #
 node_modules/
