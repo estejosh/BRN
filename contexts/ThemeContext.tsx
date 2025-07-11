@@ -7,6 +7,7 @@ export type ThemeMode = 'light' | 'dark' | 'high-contrast';
 export interface Theme {
   background: string;
   surface: string;
+  surfaceVariant: string;
   primary: string;
   secondary: string;
   text: string;
@@ -17,6 +18,7 @@ export interface Theme {
   iconPrimary: string;
   iconSecondary: string;
   border: string;
+  divider: string;
   shadow: string;
   error: string;
   warning: string;
@@ -40,6 +42,7 @@ const themes: Record<ThemeMode, Theme> = {
   light: {
     background: '#ffffff',
     surface: '#f5f5f5',
+    surfaceVariant: '#f0f0f0',
     primary: '#ff4444',
     secondary: '#666666',
     text: '#000000',
@@ -50,6 +53,7 @@ const themes: Record<ThemeMode, Theme> = {
     iconPrimary: '#000000',
     iconSecondary: '#666666',
     border: '#e0e0e0',
+    divider: '#e0e0e0',
     shadow: 'rgba(0, 0, 0, 0.1)',
     error: '#f44336',
     warning: '#ff9800',
@@ -59,6 +63,7 @@ const themes: Record<ThemeMode, Theme> = {
   dark: {
     background: '#1a1a1a',
     surface: '#2a2a2a',
+    surfaceVariant: '#333333',
     primary: '#ff4444',
     secondary: '#666666',
     text: '#ffffff',
@@ -69,6 +74,7 @@ const themes: Record<ThemeMode, Theme> = {
     iconPrimary: '#ffffff',
     iconSecondary: '#cccccc',
     border: '#333333',
+    divider: '#333333',
     shadow: 'rgba(0, 0, 0, 0.3)',
     error: '#f44336',
     warning: '#ff9800',
@@ -78,6 +84,7 @@ const themes: Record<ThemeMode, Theme> = {
   'high-contrast': {
     background: '#000000',
     surface: '#1a1a1a',
+    surfaceVariant: '#333333',
     primary: '#ffffff',
     secondary: '#ffffff',
     text: '#ffffff',
@@ -88,6 +95,7 @@ const themes: Record<ThemeMode, Theme> = {
     iconPrimary: '#ffffff',
     iconSecondary: '#ffffff',
     border: '#ffffff',
+    divider: '#ffffff',
     shadow: 'rgba(255, 255, 255, 0.2)',
     error: '#ff0000',
     warning: '#ffff00',
@@ -122,7 +130,7 @@ export const ThemeProvider: React.FC<ThemeProviderProps> = ({ children }) => {
           'Theme Loading Error',
           'Failed to load saved theme',
           'low',
-          { error: error.message },
+          { error: error instanceof Error ? error.message : String(error) },
           'ThemeContext'
         );
         // Fallback to dark theme
@@ -154,7 +162,7 @@ export const ThemeProvider: React.FC<ThemeProviderProps> = ({ children }) => {
         { 
           requestedMode: mode,
           currentMode: themeMode,
-          error: error.message 
+          error: error instanceof Error ? error.message : String(error)
         },
         'ThemeContext'
       );
@@ -175,7 +183,7 @@ export const ThemeProvider: React.FC<ThemeProviderProps> = ({ children }) => {
         'low',
         { 
           currentMode: themeMode,
-          error: error.message 
+          error: error instanceof Error ? error.message : String(error)
         },
         'ThemeContext'
       );

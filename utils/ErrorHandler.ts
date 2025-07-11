@@ -56,9 +56,9 @@ export class ErrorHandler {
 
   private setupGlobalErrorHandlers(): void {
     // Handle unhandled promise rejections
-    const originalHandler = global.ErrorUtils?.setGlobalHandler;
-    if (originalHandler) {
-      global.ErrorUtils.setGlobalHandler((error: Error, isFatal?: boolean) => {
+    if (typeof global !== 'undefined' && (global as any).ErrorUtils && typeof (global as any).ErrorUtils.setGlobalHandler === 'function') {
+      const originalHandler = (global as any).ErrorUtils.setGlobalHandler;
+      (global as any).ErrorUtils.setGlobalHandler((error: Error, isFatal?: boolean) => {
         this.handleGlobalError(error, isFatal);
       });
     }
@@ -181,7 +181,7 @@ export class ErrorHandler {
   }
 
   async getUnresolvedErrors(): Promise<ErrorLog[]> {
-    return this.errorLogs.filter(log => !log.resolve);
+    return this.errorLogs.filter(log => !log.resolved);
   }
 
   async markErrorResolved(errorId: string): Promise<void> {

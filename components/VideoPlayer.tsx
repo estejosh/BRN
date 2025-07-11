@@ -40,7 +40,7 @@ export const VideoPlayer: React.FC<VideoPlayerProps> = ({
   const [isPlaying, setIsPlaying] = useState(autoPlay);
   const [progress, setProgress] = useState(0);
   const [durationMs, setDurationMs] = useState(0);
-  const videoRef = useRef<Video>(null);
+  const videoRef = useRef<any>(null);
 
   const handleLoad = (data: any) => {
     setIsLoading(false);
@@ -87,7 +87,6 @@ export const VideoPlayer: React.FC<VideoPlayerProps> = ({
           resizeMode="cover"
           paused={!isPlaying}
           muted={muted}
-          loop={loop}
           onLoad={handleLoad}
           onProgress={handleProgress}
           onError={(error) => {

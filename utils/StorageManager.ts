@@ -136,7 +136,7 @@ export class StorageManager {
 
   async getAllKeys(): Promise<string[]> {
     try {
-      return await AsyncStorage.getAllKeys();
+      return [...(await AsyncStorage.getAllKeys())];
     } catch (error) {
       const errorMessage = error instanceof Error ? error.message : 'Unknown storage error';
       errorHandler.handleStorageError(error, 'getAllKeys()');
@@ -150,7 +150,7 @@ export class StorageManager {
         throw new Error('Keys must be an array');
       }
 
-      return await AsyncStorage.multiGet(keys);
+      return [...(await AsyncStorage.multiGet(keys))];
     } catch (error) {
       const errorMessage = error instanceof Error ? error.message : 'Unknown storage error';
       errorHandler.handleStorageError(error, 'multiGet()');
@@ -336,10 +336,10 @@ export class StorageManager {
       const testValue = { test: true, timestamp: Date.now() };
       
       await this.setItem(testKey, testValue);
-      const retrieved = await this.getItem(testKey);
+      const retrieved = await this.getItem<{ test: boolean; timestamp: number }>(testKey);
       await this.removeItem(testKey);
       
-      return retrieved && retrieved.test === true;
+      return !!(retrieved && typeof retrieved === 'object' && 'test' in retrieved && retrieved.test === true);
     } catch (error) {
       errorHandler.logError(
         'Storage Validation Error',

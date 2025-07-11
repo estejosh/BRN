@@ -114,7 +114,7 @@ export const SvgIcon: React.FC<SvgIconProps> = ({
       'SvgIcon Render Error',
       `Failed to render icon "${name}"`,
       'medium',
-      { name, size, color, error: error.message },
+      { name, size, color, error: error instanceof Error ? error.message : String(error) },
       'SvgIcon'
     );
     

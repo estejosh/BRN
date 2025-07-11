@@ -12,8 +12,17 @@ import { Ionicons } from '@expo/vector-icons';
 import { errorHandler } from '../../utils/ErrorHandler';
 import { ErrorBoundary } from '../../components/ErrorBoundary';
 
+interface Post {
+  id: string;
+  user: string;
+  content: string;
+  likes: number;
+  comments: number;
+  timestamp: string;
+}
+
 const FeedScreen = () => {
-  const [posts, setPosts] = useState([]);
+  const [posts, setPosts] = useState<Post[]>([]);
   const [isLoading, setIsLoading] = useState(false);
   const [isRefreshing, setIsRefreshing] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -155,7 +164,7 @@ const FeedScreen = () => {
   }, []);
 
   // Render post with error handling
-  const renderPost = (post: any) => {
+  const renderPost = (post: Post) => {
     try {
       return (
         <View key={post.id} style={styles.post}>
