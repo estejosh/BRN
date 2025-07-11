@@ -248,6 +248,10 @@ Desktop.ini
 # Large documents
 *.pdf
 *.doc
+
+# APK files (too large for GitHub)
+*.apk
+*.aab
 *.docx
 *.xls
 *.xlsx
